@@ -12,7 +12,9 @@
     <header>
 		{% block header %}{% include '_header.html.twig' %}{% endblock %}
     </header>
+	<section class="layout">
 		{% block body %}{% endblock %}
+	</section>
 		{% block javascripts %}{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</body>

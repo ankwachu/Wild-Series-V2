@@ -2,9 +2,13 @@
 @import "~bootstrap/scss/bootstrap";
 
 // customize some Bootstrap variables
-$primary: darken(#428bca, 20%);
+$primary: lighten(#428bca, 40%);
 
 
 body {
     background-color: $primary;
+}
+
+.layout {
+    margin: 15px;
 }
