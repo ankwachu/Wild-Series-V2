@@ -1,23 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ program.title }}{% endblock %}
+{% block title %}
+    {{ program.title }}
+{% endblock %}
 
 {% block body %}
 
     <div class="media">
-        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
-        <div class="media-body">
-            <h1 class="mt-0">{{ program.title }}</h1>
-            <p>Categorie : {{ program.category.name }}</p>
-            <h2>Saison {{ season.number }}</h2>
-            {% for episode in episodes %}
-                <a href=""><h3>Episode {{ episode.number }} : {{ episode.title }}</h3></a>
-                <p>{{ episode.synopsis }}</p>
-                <br/>
-            {% endfor %}
-            <a href="{{ path('wild_programs') }}">
-                Retour à l'accueil
-            </a>
-        </div>
+        <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
+            <div class="media-body">
+                <a href="{{ path('wild_show', {'slug': program.title|replace({' ':'-'})|lower }) }}">
+                    <h1 class="mt-0">{{ program.title }}</h1>
+                </a>
+                <p>Categorie :
+                    {{ program.category.name }}</p>
+                <h2>Saison
+                    {{ season.number }}</h2>
+                {% for episode in episodes %}
+                    <a href="{{ path('wild_episode', {'id': episode.id}) }}">
+                        <h3>Episode
+                            {{ episode.number }}
+                            :
+                            {{ episode.title }}</h3>
+                    </a>
+                    <p>{{ episode.synopsis }}</p>
+                    <br/>
+                {% endfor %}
+                {% if episodes is empty %}
+                    <h3>Pas d'épisodes disponibles</h3>
+                {% endif %}
+                <a href="{{ path('wild_programs') }}">
+                    Retour à l'accueil
+                </a>
+            </div>
     </div>
-{% endblock %} 
+
+{% endblock %}
