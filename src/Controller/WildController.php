@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Program;
-use App\Entity\Category;
 use App\Entity\Season;
 use App\Entity\Episode;
 use App\Form\ProgramSearchType;
@@ -90,50 +89,6 @@ class WildController extends AbstractController
             'program' => $program,
             'slug'  => $slug,
             'seasons'  => $seasons,
-        ]);
-    }
-
-    /**
-     * Getting shows by category with a formatted slug
-     *
-     * @param string $categoryName
-     * @Route("/category/{categoryName<^[a-z0-9-]+$>}", defaults={"categoryName" = null}, name="category")
-     * @return Response
-     */
-
-    public function showByCategory(string $categoryName): Response
-    {
-        if (!$categoryName) {
-            throw $this->createNotFoundException('No category found with program.');
-        }
-        $categoryName = preg_replace(
-            '/-/',
-            ' ',
-            ucwords(trim(strip_tags($categoryName)), "-")
-        );
-
-        $category = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findOneBy(['name' => $categoryName]);
-
-        $program = $this->getDoctrine()
-            ->getRepository(Program::class)
-            ->findBy(
-                ['category' => $category],
-                ['id' => 'DESC'],
-                3
-            );
-
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with ' . $categoryName . ' category, found in program\'s table.'
-            );
-        }
-
-        return $this->render('wild/category.html.twig', [
-            'category' => $category,
-            'categoryName'  => $categoryName,
-            'programs' => $program,
         ]);
     }
 
