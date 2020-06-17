@@ -33,7 +33,10 @@ class CategoryController extends AbstractController
 
         $categories = $this->getDoctrine()
             ->getRepository(Category::class)
-            ->findAll();
+            ->findBy(
+                array(), 
+                array('name' => 'ASC')
+              );
 
         return $this->render('category/index.html.twig', [
             'form' => $form->createView(),
