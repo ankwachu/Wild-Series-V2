@@ -4,30 +4,26 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Toutes les séries de la table program :
-	</h1>
-	<div class="">
-		{{ form_start(form) }}
-		{{ form_row(form.title) }}
-		<button type="submit" class="btn btn-outline-success">Rechercher</button>
-		{{ form_end(form) }}
-	</div>
-	{% for program in programs %}
-		<div>
-			<a href="{{ path('wild_show', { 'slug': program.title|replace({' ':'-'})|lower }) }}">
-				<h2>{{ loop.index }}
-					/
-					{{ program.title }}
-					- Catégorie :
-					{{ program.category.name }}</h2>
-			</a>
-		</div>
-	{% else %}
-		<div>
-			<h2>Aucune série trouvée.</h2>
-		</div>
-	{% endfor %}
-	<a href="{{ path('app_index') }}">
-		Retour à l'accueil
-	</a>
+    <h1>Toutes les séries de la table program :</h1>
+    <div class="mb-5">
+        {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        <button type="submit" class="btn btn-success">Rechercher</button>
+        {{ form_end(form) }}
+    </div>
+    {% for program in programs %}
+        <div>
+            <a href="{{ path('wild_show', { 'slug': program.title|replace({' ':'-'})|lower }) }}">
+                <h2>{{ loop.index }}/ {{ program.title }}
+                    - Catégorie : {{ program.category.name }}</h2>
+            </a>
+        </div>
+    {% else %}
+        <div>
+            <h2>Aucune série trouvée.</h2>
+        </div>
+    {% endfor %}
+    <a href="{{ path('app_index') }}">
+        Retour à l'accueil
+    </a>
 {% endblock %}

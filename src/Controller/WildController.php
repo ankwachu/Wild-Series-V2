@@ -85,7 +85,7 @@ class WildController extends AbstractController
                 'program' => $program,
             ]);
 
-        return $this->render('wild/show.html.twig', [
+        return $this->render('wild/program.html.twig', [
             'program' => $program,
             'slug'  => $slug,
             'seasons'  => $seasons,

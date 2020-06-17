@@ -14,9 +14,10 @@
                     <h3>Pas de saisons disponibles</h3>
                 {% endif %}
     {% for season in seasons %}
-                <a href="{{ path('wild_season', { 'id': season.id }) }}">Saison {{ season.number }}</a>
-                <br/>
-            {% endfor %}
+        <div>
+            <a href="{{ path('wild_season', { 'id': season.id }) }}">Saison {{ season.number }}</a>
+        </div>
+    {% endfor %}
     <a href="{{ path('wild_programs') }}">
     Retour à l'accueil
     </a>
