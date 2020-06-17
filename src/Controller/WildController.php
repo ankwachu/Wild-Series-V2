@@ -6,10 +6,13 @@ use App\Entity\Program;
 use App\Entity\Category;
 use App\Entity\Season;
 use App\Entity\Episode;
+use App\Form\ProgramSearchType;
+use App\Repository\ProgramRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/wild", name="wild_")
@@ -22,7 +25,7 @@ class WildController extends AbstractController
      * @Route("/series", name="programs")
      */
 
-    public function index(): Response
+    public function index(Request $request, ProgramRepository $programRepository): Response
     {
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
@@ -34,9 +37,18 @@ class WildController extends AbstractController
             );
         }
 
+        $form = $this->createForm(ProgramSearchType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $title = $form->getData()->getTitle();
+            $programs = $programRepository->search($title);
+        }
+
         return $this->render('wild/index.html.twig', [
             'website' => 'Wild Séries V2',
             'programs' => $programs,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -130,7 +142,7 @@ class WildController extends AbstractController
      * @return Response
      * @Route("/season/{id<^[0-9-]+$>}", defaults={"id" = null}, name="season")
      */
-    public function showBySeason(int $id) : Response
+    public function showBySeason(int $id): Response
     {
         if (!$id) {
             throw $this
@@ -143,7 +155,7 @@ class WildController extends AbstractController
         $episodes = $season->getEpisode();
         if (!$season) {
             throw $this->createNotFoundException(
-                'No season with '.$id.' season, found in Season\'s table.'
+                'No season with ' . $id . ' season, found in Season\'s table.'
             );
         }
         return $this->render('wild/season.html.twig', [
