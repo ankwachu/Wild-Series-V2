@@ -1,18 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ category.name }}{% endblock %}
+{% block title %}Catégories
+{% endblock %}
 
 {% block body %}
-    {% for program in programs %}
-        <div class="media">
-            <div class="media-body">
-                <h1 class="mt-0">{{ program.title }}</h1>
-                <h2>{{ program.id }}</h2>
-                <p>{{ program.summary }}</p>
-            </div>
+    <div class="">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            
+            <button class="btn btn-primary">Rechercher</button>
+            
+            {{ form_end(form) }}
+    </div>
+    <div class="row">
+        {% if programs is empty %}
+            <h3>pas de séries disponibles
+            </h3>
+        {% endif %}
+
+        {% for program in programs %}
+            <div class="card m-4" style="width: 18rem;">
+                <img src="{{ program.poster }}" class="card-img-top" alt="{{ program.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ program.title }}</h5>
+                        {# <p class="card-text">{{ program.summary }}</p> #}
+                        <a href="{{ path('wild_show', { 'slug': program.title|replace({' ':'-'})|lower }) }}" class="btn btn-primary">En savoir plus</a>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-    <a href="{{ path('app_index') }}">
-        Retour à l'accueil
-    </a>
-{% endblock %} 
+
+        <a href="{{ path('app_index') }}">
+            Retour à l'accueil
+        </a>
+    {% endblock %}

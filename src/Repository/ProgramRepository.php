@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Program;
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -23,10 +24,24 @@ class ProgramRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.title LIKE :title')
-            ->setParameter('title', '%'.$title.'%')
+            ->setParameter('title', '%' . $title . '%')
             ->getQuery()
-            ->execute()
-        ;
+            ->execute();
     }
-    
+
+    /**
+     * @return Program[]
+     */
+    public function findProgramByCategory(?Category $category = null)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.category = :category')
+            ->setParameter('category', $category);
+        if ($category == empty([$qb])) {
+            return $qb = $this->findAll();
+        }
+        $qb->orderBy('p.title', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

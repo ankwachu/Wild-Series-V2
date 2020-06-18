@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Doctrine\ORM\EntityRepository;
+use App\Repository\CategoryRepository;
 class ProgramType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -19,7 +19,7 @@ class ProgramType extends AbstractType
             ->add('poster')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'query_builder' => function (EntityRepository $er) {
+                'query_builder' => function (CategoryRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->orderBy('c.name', 'ASC');
                 },

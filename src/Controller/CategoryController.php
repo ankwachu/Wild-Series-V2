@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Category;
 use App\Entity\Program;
+use App\Form\CategorySearchType;
+use App\Repository\ProgramRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -44,47 +46,74 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    // /**
+    //  * Getting shows by category with a formatted slug
+    //  *
+    //  * @param string $categoryName
+    //  * @Route("/category/{categoryName<^[a-z0-9-]+$>}", defaults={"categoryName" = null}, name="category_name")
+    //  * @return Response
+    //  */
+
+    // public function showByCategory(string $categoryName): Response
+    // {
+    //     if (!$categoryName) {
+    //         throw $this->createNotFoundException('No category found with program.');
+    //     }
+    //     $categoryName = preg_replace(
+    //         '/-/',
+    //         ' ',
+    //         ucwords(trim(strip_tags($categoryName)), "-")
+    //     );
+
+    //     $category = $this->getDoctrine()
+    //         ->getRepository(Category::class)
+    //         ->findOneBy(['name' => $categoryName]);
+
+    //     $program = $this->getDoctrine()
+    //         ->getRepository(Program::class)
+    //         ->findBy(
+    //             ['category' => $category],
+    //             ['id' => 'DESC'],
+    //             3
+    //         );
+
+    //     if (!$program) {
+    //         throw $this->createNotFoundException(
+    //             'No program with ' . $categoryName . ' category, found in program\'s table.'
+    //         );
+    //     }
+
+    //     return $this->render('category/category.html.twig', [
+    //         'category' => $category,
+    //         'categoryName'  => $categoryName,
+    //         'programs' => $program,
+    //     ]);
+    // }
+
     /**
-     * Getting shows by category with a formatted slug
-     *
-     * @param string $categoryName
-     * @Route("/category/{categoryName<^[a-z0-9-]+$>}", defaults={"categoryName" = null}, name="category_name")
+     * @Route("/category/list", name="category_list")
      * @return Response
      */
 
-    public function showByCategory(string $categoryName): Response
-    {
-        if (!$categoryName) {
-            throw $this->createNotFoundException('No category found with program.');
-        }
-        $categoryName = preg_replace(
-            '/-/',
-            ' ',
-            ucwords(trim(strip_tags($categoryName)), "-")
-        );
+    public function list(ProgramRepository $programRepository, Request $request): Response {
 
-        $category = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findOneBy(['name' => $categoryName]);
+        $form = $this->createForm(CategorySearchType::class);
+        $form->handleRequest($request);
 
-        $program = $this->getDoctrine()
-            ->getRepository(Program::class)
-            ->findBy(
-                ['category' => $category],
-                ['id' => 'DESC'],
-                3
-            );
-
-        if (!$program) {
-            throw $this->createNotFoundException(
-                'No program with ' . $categoryName . ' category, found in program\'s table.'
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $category = $data["category"];
+            $programs = $programRepository->findProgramByCategory($category);
+        } else {
+            $programs = $programRepository->findBy(
+                [],
+                ['title' => 'ASC']
             );
         }
 
         return $this->render('category/category.html.twig', [
-            'category' => $category,
-            'categoryName'  => $categoryName,
-            'programs' => $program,
+            'programs' => $programs,
+            'form' => $form->createView(),
         ]);
     }
 }
