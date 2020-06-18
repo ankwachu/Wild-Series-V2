@@ -4,7 +4,15 @@
 
 {% block body %}
     <h1>Program index</h1>
-
+<div class="row">
+    <div class="col-sm-4 label-form">
+        {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+        <a href="{{ path('program_index') }}" class="btn btn-primary">Reset</a>
+        {{ form_end(form) }}
+    </div>
+</div>
     <table class="table">
         <thead>
             <tr>
