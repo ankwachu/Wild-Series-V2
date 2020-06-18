@@ -4,13 +4,15 @@
 {% endblock %}
 
 {% block body %}
-    <div class="">
+    <div class="row label-form justify-content-center">
+    <div class="col-sm-4">
         {{ form_start(form) }}
             {{ form_widget(form) }}
             
             <button class="btn btn-primary">Rechercher</button>
             
             {{ form_end(form) }}
+            </div>
     </div>
     <div class="row">
         {% if programs is empty %}
@@ -30,7 +32,7 @@
             {% endfor %}
         </div>
 
-        <a href="{{ path('app_index') }}">
+        <a href="{{ path('app_index') }}" class="btn btn-info">
             Retour à l'accueil
         </a>
     {% endblock %}

@@ -17,19 +17,19 @@
                 <h2>Saison
                     {{ season.number }}</h2>
                 {% for episode in episodes %}
-                    <a href="{{ path('wild_episode', {'id': episode.id}) }}">
-                        <h3>Episode
-                            {{ episode.number }}
-                            :
-                            {{ episode.title }}</h3>
-                    </a>
-                    <p>{{ episode.synopsis }}</p>
-                    <br/>
+                    <div>
+                        <a href="{{ path('wild_episode', {'id': episode.id}) }}">
+                            <h3>Episode
+                                {{ episode.number }}
+                                :
+                                {{ episode.title }}</h3>
+                        </a>
+                    </div>
                 {% endfor %}
                 {% if episodes is empty %}
                     <h3>Pas d'épisodes disponibles</h3>
                 {% endif %}
-                <a href="{{ path('wild_programs') }}">
+                <a href="{{ path('wild_programs') }}" class="btn btn-info">
                     Retour à l'accueil
                 </a>
             </div>

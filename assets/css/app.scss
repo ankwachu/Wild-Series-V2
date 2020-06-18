@@ -23,3 +23,10 @@ img {
 .form-group {
   flex-direction: column;
 }
+
+.label-form {
+  label {
+    font-size: 26px;
+    max-width: 300px !important;
+  }
+}
