@@ -1,17 +1,17 @@
 {% extends "base.html.twig" %}
 
-{% block title %}All programs
+{% block title %}Séries
 {% endblock %}
 
 {% block body %}
     <div class="row">
-
         <h1>Toutes les séries de la table program :</h1>
-        <div class="col-sm-4 label-form">
+        <div class="col-12 col-lg-5 label-form">
             {{ form_start(form) }}
             {{ form_row(form.title) }}
             <button type="submit" class="btn btn-primary">Rechercher</button>
-            <a href="{{ path('wild_programs') }}" class="btn btn-primary">Reset</a>
+            <a href="{{ path('wild_programs') }}" class="btn btn-primary">Toutes les séries</a>
+            <a href="{{ path('app_index') }}" class="btn btn-info">Retour à l'accueil</a>
             {{ form_end(form) }}
         </div>
     </div>
@@ -30,9 +30,5 @@
                 <h2>Aucune série trouvée.</h2>
             </div>
         {% endfor %}
-
-        <a href="{{ path('app_index') }}" class="btn btn-info">
-            Retour à l'accueil
-        </a>
     </div>
 {% endblock %}

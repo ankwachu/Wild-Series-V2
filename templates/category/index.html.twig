@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categories
+{% block title %}Créer une catégorie
 {% endblock %}
 
 {% block body %}
@@ -17,7 +17,6 @@
                 <button class="btn btn-success">{{ button_label|default('Sauvegarder') }}</button>
 
                 {{ form_end(form) }}
-
 
                 <h2 class="mt-4">Liste des catégories:</h2>
                 {% for category in categories %}
