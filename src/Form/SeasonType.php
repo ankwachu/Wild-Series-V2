@@ -6,6 +6,10 @@ use App\Entity\Season;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Repository\ProgramRepository;
+use App\Entity\Program;
+
 
 class SeasonType extends AbstractType
 {
@@ -15,7 +19,14 @@ class SeasonType extends AbstractType
             ->add('number')
             ->add('year')
             ->add('description')
-            ->add('program', null, ['choice_label' => 'title'])         ;
+            ->add('program', EntityType::class, [
+                'class' => Program::class,
+                'query_builder' => function (ProgramRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->orderBy('p.title', 'ASC');
+                },
+                'choice_label' => 'title'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
