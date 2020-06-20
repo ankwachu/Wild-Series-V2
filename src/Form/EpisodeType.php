@@ -15,7 +15,7 @@ class EpisodeType extends AbstractType
             ->add('title')
             ->add('number')
             ->add('synopsis')
-            ->add('seasons', null, ['choice_label' => 'number'])         ;
+             ->add('seasons', null, ['choice_label' => 'id']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

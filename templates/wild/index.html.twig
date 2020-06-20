@@ -5,8 +5,8 @@
 
 {% block body %}
     <div class="row">
-        <h1>Toutes les séries de la table program :</h1>
-        <div class="col-12 col-lg-5 label-form">
+        <div class="col-12 col-lg-6 label-form">
+        <h1>Toutes les séries :</h1>
             {{ form_start(form) }}
             {{ form_row(form.title) }}
             <button type="submit" class="btn btn-primary">Rechercher</button>
@@ -15,6 +15,7 @@
             {{ form_end(form) }}
         </div>
     </div>
+    <div class="row">
     <div class="col-12 mt-5">
         {% for program in programs %}
             <div>
@@ -30,5 +31,6 @@
                 <h2>Aucune série trouvée.</h2>
             </div>
         {% endfor %}
+    </div>
     </div>
 {% endblock %}

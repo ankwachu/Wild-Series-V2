@@ -4,12 +4,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Toutes les catégories :</h1>
-    <div class="row label-form">
-        <div class="col-12 col-lg-4">
+    <div class="row">
+        <div class="col-12 col-lg-6 label-form">
+            <h1>Toutes les catégories :</h1>
             {{ form_start(form) }}
             {{ form_widget(form) }}
-
             <button class="btn btn-primary">Rechercher</button>
             <a href="{{ path('app_index') }}" class="btn btn-info">Retour à l'accueil</a>
             {{ form_end(form) }}
@@ -29,8 +28,8 @@
                         {# <p class="card-text">{{ program.summary }}</p> #}
                         <a href="{{ path('wild_show', { 'slug': program.title|replace({' ':'-'})|lower }) }}" class="btn btn-primary">En savoir plus</a>
                     </div>
-            </div>
-        {% endfor %}
-    </div>
+                </div>
+            {% endfor %}
+        </div>
 
-{% endblock %}
+    {% endblock %}
