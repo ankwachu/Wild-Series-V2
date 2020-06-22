@@ -9,8 +9,8 @@
     <div class="media">
         <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
             <div class="media-body">
-                <a href="{{ path('wild_show', {'slug': program.title|replace({' ':'-'})|lower }) }}">
-                    <h1 class="mt-0">{{ program.title }}</h1>
+                <a href="{{ path('wild_show', {'slug': program.slug}) }}">
+                    <h1 class="mt-0">{{ program.title|capitalize }}</h1>
                 </a>
                 <p>Categorie :
                     {{ program.category.name }}</p>
@@ -18,11 +18,11 @@
                     {{ season.number }}</h2>
                 {% for episode in episodes %}
                     <div>
-                        <a href="{{ path('wild_episode', {'id': episode.id}) }}">
+                        <a href="{{ path('wild_episode', {'slug': episode.slug}) }}">
                             <h3>Episode
                                 {{ episode.number }}
                                 :
-                                {{ episode.title }}</h3>
+                                {{ episode.title|capitalize }}</h3>
                         </a>
                     </div>
                 {% endfor %}

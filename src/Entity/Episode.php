@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EpisodeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=EpisodeRepository::class)
@@ -37,6 +38,12 @@ class Episode
      * @ORM\JoinColumn(nullable=false)
      */
     private $seasons;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Gedmo\Slug(fields={"title"})
+     */
+    private $slug;
 
     public function getId(): ?int
     {
@@ -87,6 +94,18 @@ class Episode
     public function setSeasons(?Season $seasons): self
     {
         $this->seasons = $seasons;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

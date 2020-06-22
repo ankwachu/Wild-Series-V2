@@ -113,11 +113,22 @@ class WildController extends AbstractController
     }
 
     /**
-     * @Route("/episode/{id}",
+     * @param string $slug The slugger
+     * @Route("/episode/{slug}", defaults={"slug" = null},
      *     name="episode")
      */
-    public function showEpisode(Episode $episode): Response
+    public function showEpisode(?string $slug): Response
     {
+        $episode = $this->getDoctrine()
+        ->getRepository(Episode::class)
+        ->findOneBy(['slug' => $slug]);
+
+        if (!$episode) {
+            throw $this->createNotFoundException(
+                'No program with ' . $slug . ' title, found in program\'s table.'
+            );
+        }
+
         $season = $episode->getSeasons();
         $program = $season->getProgram();
 
