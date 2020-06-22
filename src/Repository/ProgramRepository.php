@@ -20,6 +20,11 @@ class ProgramRepository extends ServiceEntityRepository
         parent::__construct($registry, Program::class);
     }
 
+    public function findAll()
+    {
+        return $this->findBy(array(), array('title' => 'ASC'));
+    }
+
     public function search($title)
     {
         return $this->createQueryBuilder('p')

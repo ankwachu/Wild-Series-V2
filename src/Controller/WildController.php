@@ -26,10 +26,7 @@ class WildController extends AbstractController
 
     public function index(Request $request, ProgramRepository $programRepository): Response
     {
-        $programs = $this->getDoctrine()
-            ->getRepository(Program::class)
-            ->findAll();
-
+        $programs = $programRepository->findAll();
         if (!$programs) {
             throw $this->createNotFoundException(
                 'No program found in program\'s table.'
@@ -38,7 +35,7 @@ class WildController extends AbstractController
 
         $form = $this->createForm(ProgramSearchType::class);
         $form->handleRequest($request);
-
+        
         if($form->isSubmitted() && $form->isValid()) {
             $title = $form->getData()->getTitle();
             $programs = $programRepository->search($title);
@@ -55,24 +52,20 @@ class WildController extends AbstractController
      * Getting a program with a formatted slug for title
      *
      * @param string $slug The slugger
-     * @Route("/show/{slug<^[a-z0-9-]+$>}", defaults={"slug" = null}, name="show")
+     * @Route("/show/{slug}", defaults={"slug" = null}, name="show")
      * @return Response
      */
     public function show(?string $slug): Response
     {
         if (!$slug) {
             throw $this
-                ->createNotFoundException('No slug has been sent to find a program in program\'s table.');
+                ->createNotFoundException('No slug in program\'s table.');
         }
-        $slug = preg_replace(
-            '/-/',
-            ' ',
-            ucwords(trim(strip_tags($slug)), "-")
-        );
 
         $program = $this->getDoctrine()
             ->getRepository(Program::class)
-            ->findOneBy(['title' => mb_strtolower($slug)]);
+            ->findOneBy(['slug' => $slug]);
+            
         if (!$program) {
             throw $this->createNotFoundException(
                 'No program with ' . $slug . ' title, found in program\'s table.'
@@ -87,7 +80,6 @@ class WildController extends AbstractController
 
         return $this->render('wild/program.html.twig', [
             'program' => $program,
-            'slug'  => $slug,
             'seasons'  => $seasons,
         ]);
     }

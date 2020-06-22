@@ -4,15 +4,16 @@
 
 {% block body %}
     <h1>Season index</h1>
+    <a href="{{ path('season_new') }}" class="btn btn-success mb-3">Ajouter une saison</a>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Number</th>
-                <th>Year</th>
+                <th>Saison</th>
+                <th>Année</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,5 +36,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('season_new') }}">Create new</a>
 {% endblock %}
