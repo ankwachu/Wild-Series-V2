@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Program;
+use App\Entity\Actor;
 use App\Entity\Season;
 use App\Entity\Episode;
+use App\Entity\Program;
 use App\Form\ProgramSearchType;
 use App\Repository\ProgramRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Regex;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/wild", name="wild_")
@@ -136,6 +137,20 @@ class WildController extends AbstractController
             'episode' => $episode,
             'season'   => $season,
             'program'  => $program,
+        ]);
+    }
+
+    /**
+     * @param string $actorName
+     * @return Response
+     * @Route("/show/actor/{id}", name="show_actor")
+     */
+    public function showByActor(Actor $actor): Response
+    {
+        $program = $actor->getPrograms()->toArray();
+        return $this->render(("wild/actor.html.twig"), [
+            "actor" => $actor,
+            "programs" => $program,
         ]);
     }
 }
