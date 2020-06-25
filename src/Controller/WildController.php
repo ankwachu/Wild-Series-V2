@@ -141,9 +141,8 @@ class WildController extends AbstractController
     }
 
     /**
-     * @param string $actorName
-     * @return Response
-     * @Route("/show/actor/{id}", name="show_actor")
+     * @param string $slug The slugger
+     * @Route("/show/actor/{slug}", name="show_actor")
      */
     public function showByActor(Actor $actor): Response
     {
