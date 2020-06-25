@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Program;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use phpDocumentor\Reflection\Types\Self_;
 use Faker;
+use App\Entity\Program;
+use phpDocumentor\Reflection\Types\Self_;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -65,16 +65,29 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $i = 0;
-        foreach (self::PROGRAMS as $title => $data){
+        $faker  =  Faker\Factory::create();
+
+        for ($i = 0; $i < 20; $i++){
             $program = new Program();
-            $program->setTitle($title);
-            $program->setSummary($data['summary']);
+            $program->setTitle($faker->realText($maxNbChars = 30));
+            $program->setSummary($faker->realText($maxNbChars = 500));
+            $program->setPoster('https://www.fillmurray.com/200/300');
+            // $program->setPoster($faker->imageUrl($width = 640, $height = 480));
             $manager->persist($program);
             $this->addReference('program_'. $i, $program);
-            $program->setCategory($this->getReference('categorie_4'));
-            $i++;
+            $program->setCategory($this->getReference('categorie_'.random_int(0,4)));
         }
+
+        // $i = 0;
+        // foreach (self::PROGRAMS as $title => $data){
+        //     $program = new Program();
+        //     $program->setTitle($title);
+        //     $program->setSummary($data['summary']);
+        //     $manager->persist($program);
+        //     $this->addReference('program_'. $i, $program);
+        //     $program->setCategory($this->getReference('categorie_4'));
+        //     $i++;
+        // }
         $manager->flush();
     }
 

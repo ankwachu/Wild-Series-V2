@@ -21,15 +21,15 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        // $faker  =  Faker\Factory::create('fr_FR');
+         $faker  =  Faker\Factory::create('fr_FR');
 
-        // for ($i = 0; $i < 50; $i++) {
-        //     $actor = new Actor();
-        //     $actor->setName($faker->name);
-        //     $manager->persist($actor);
-        //     $this->addReference('actor_' . $i, $actor);
-        //     $actor->addProgram($this->getReference('program_'.random_int(0,4)));
-        // }
+        for ($i = 0; $i < 200; $i++) {
+            $actor = new Actor();
+            $actor->setName($faker->name);
+            $manager->persist($actor);
+            $this->addReference('actor_' . $i, $actor);
+            $actor->addProgram($this->getReference('program_'.random_int(0,19)));
+        }
 
         foreach (self::ACTORS as $key => $actorName){
             $actor = new Actor();
