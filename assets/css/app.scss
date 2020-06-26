@@ -36,3 +36,8 @@ img {
   background-size: contain;
   // background-position: ; 
 }
+
+.fc-time::after {
+  content: "-";
+  padding: 4px;
+}

@@ -101,8 +101,8 @@ class CalendarSubscriber implements EventSubscriberInterface
              */
 
             $episodeEvent->setOptions([
-                'backgroundColor' => 'red',
-                'borderColor' => 'red',
+                'backgroundColor' => '#26a69a',
+                'borderColor' => '#26a69a',
             ]);
             $episodeEvent->addOption(
                 'url',
