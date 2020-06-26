@@ -16,6 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class EpisodeController extends AbstractController
 {
     /**
+     * @Route("/calendar", name="episode_calendar", methods={"GET"})
+     */
+    public function calendar(): Response
+    {
+        return $this->render('wild/calendar.html.twig');
+    }
+
+    /**
      * @Route("/", name="episode_index", methods={"GET"})
      */
     public function index(EpisodeRepository $episodeRepository): Response

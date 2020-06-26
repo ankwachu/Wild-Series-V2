@@ -23,6 +23,10 @@
                 <th>Synopsis</th>
                 <td>{{ episode.synopsis }}</td>
             </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ episode.beginAt|format_datetime(locale='fr')}}</td>
+            </tr>
         </tbody>
     </table>
 

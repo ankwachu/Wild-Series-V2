@@ -45,6 +45,16 @@ class Episode
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $beginAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $endAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +116,30 @@ class Episode
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getBeginAt(): ?\DateTimeInterface
+    {
+        return $this->beginAt;
+    }
+
+    public function setBeginAt(\DateTimeInterface $beginAt): self
+    {
+        $this->beginAt = $beginAt;
+
+        return $this;
+    }
+
+    public function getEndAt(): ?\DateTimeInterface
+    {
+        return $this->endAt;
+    }
+
+    public function setEndAt(?\DateTimeInterface $endAt): self
+    {
+        $this->endAt = $endAt;
 
         return $this;
     }

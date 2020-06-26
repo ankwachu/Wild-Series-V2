@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Episode index{% endblock %}
+{% block title %}Episode index
+{% endblock %}
 
 {% block body %}
     <h1>Episode index</h1>
@@ -12,25 +13,27 @@
                 <th>Titre</th>
                 <th>Épisode</th>
                 <th>Synopsis</th>
+                <th>Date</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for episode in episodes %}
-            <tr>
-                <td>{{ episode.title }}</td>
-                <td>{{ episode.number }}</td>
-                <td>{{ episode.synopsis }}</td>
-                <td>
-                    <a href="{{ path('episode_show', {'slug': episode.slug}) }}">show</a>
-                    <a href="{{ path('episode_edit', {'slug': episode.slug}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
+            {% for episode in episodes %}
+                <tr>
+                    <td>{{ episode.title }}</td>
+                    <td>{{ episode.number }}</td>
+                    <td>{{ episode.synopsis }}</td>
+                    <td>{{ episode.beginAt|format_datetime(locale='fr') }}</td>
+                    <td>
+                        <a href="{{ path('episode_show', {'slug': episode.slug}) }}">show</a>
+                        <a href="{{ path('episode_edit', {'slug': episode.slug}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
