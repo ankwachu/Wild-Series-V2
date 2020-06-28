@@ -13,6 +13,7 @@
                 <h2>Saison {{ season.number }}</h2>
             </a>
                 <h3>Episode {{ episode.number }} : {{ episode.title|capitalize }}</h3>
+                <p>{{ episode.beginAt|format_datetime('full', 'short', locale='fr') | capitalize}}</p>
                 <p>{{ episode.synopsis }}</p>
 
             <a href="{{ path('wild_programs') }}">

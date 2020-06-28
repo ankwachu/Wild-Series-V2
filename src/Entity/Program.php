@@ -23,7 +23,7 @@ class Program
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private $name;
 
     /**
      * @ORM\Column(type="text")
@@ -48,7 +48,7 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Gedmo\Slug(fields={"title"})
+     * @Gedmo\Slug(fields={"name"})
      */
     private $slug;
 
@@ -68,14 +68,14 @@ class Program
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getname(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): self
+    public function setname(string $name): self
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }

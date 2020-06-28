@@ -107,7 +107,7 @@ class CategoryController extends AbstractController
         } else {
             $programs = $programRepository->findBy(
                 [],
-                ['title' => 'ASC']
+                ['name' => 'ASC']
             );
         }
 

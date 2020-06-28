@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\Episode;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Program;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Episode|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +21,29 @@ class EpisodeRepository extends ServiceEntityRepository
         parent::__construct($registry, Episode::class);
     }
 
-    // /**
-    //  * @return Episode[] Returns an array of Episode objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    const NUMBER_DATES = 12;
+    
+    public function findByDateExpiration()
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.beginAt >= :dateToday')
+            ->setParameter('dateToday', new DateTime('NOW'))
+            ->orderBy('e.beginAt', 'ASC')
+            ->setMaxResults(self::NUMBER_DATES);
+        $query = $qb->getQuery();
+        return $query->execute();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Episode
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+
+    // SELECT episode.title,episode.begin_at, program.title FROM `wild-series-v2`.episode join `wild-series-v2`.program where episode.seasons_id = program.id;
+    public function findByDate()
+{
+   $em = $this->getEntityManager();
+   $query = $em->createQuery('SELECT e.title, e.slug, e.beginAt, p.name, p.poster FROM App\Entity\Episode e JOIN App\Entity\Program p where e.seasons  = p.id');
+  
+   return $query->execute();
+}
+
+
+    // $query = $em->createQuery('SELECT p, c, a FROM App\Entity\Program p INNER JOIN p.category c LEFT JOIN p.actors a');
 }

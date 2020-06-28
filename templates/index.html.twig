@@ -17,6 +17,24 @@
             Créer une catégorie
         </a>
     </div>
+        {{ dump(episodes) }}
+
+    {% for episode in episodes %}
+    <div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      {# <img src="{{episode.poster}}" class="card-img" alt="..."> #}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{episode.name}}</h5>
+        <p class="card-text">{{episode.title}}</p>
+        <p class="card-text"><small class="text-muted">{{ episode.beginAt|format_datetime('full', 'short', locale='fr') | capitalize}}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endfor %}
     <div class="background-wallpaper">wallpaper</div>
-       <div id="calendar-holder"></div>
+
 {% endblock %}

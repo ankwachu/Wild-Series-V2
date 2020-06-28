@@ -17,7 +17,7 @@ class ProgramType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('name')
             ->add('summary')
             ->add('poster')
             ->add('category', EntityType::class, [

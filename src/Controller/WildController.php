@@ -28,11 +28,11 @@ class WildController extends AbstractController
     public function index(Request $request, ProgramRepository $programRepository): Response
     {
         $programs = $programRepository->findAll();
-        if (!$programs) {
-            throw $this->createNotFoundException(
-                'No program found in program\'s table.'
-            );
-        }
+        // if (!$programs) {
+        //     throw $this->createNotFoundException(
+        //         'No program found in program\'s table.'
+        //     );
+        // }
 
         $form = $this->createForm(ProgramSearchType::class);
         $form->handleRequest($request);
