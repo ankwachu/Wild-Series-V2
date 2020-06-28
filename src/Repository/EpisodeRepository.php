@@ -22,7 +22,7 @@ class EpisodeRepository extends ServiceEntityRepository
     }
 
     const NUMBER_DATES = 12;
-    
+
     public function findByDateExpiration()
     {
         $qb = $this->createQueryBuilder('e')
@@ -34,16 +34,11 @@ class EpisodeRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
-
-    // SELECT episode.title,episode.begin_at, program.title FROM `wild-series-v2`.episode join `wild-series-v2`.program where episode.seasons_id = program.id;
     public function findByDate()
-{
-   $em = $this->getEntityManager();
-   $query = $em->createQuery('SELECT e.title, e.slug, e.beginAt, p.name, p.poster FROM App\Entity\Episode e JOIN App\Entity\Program p where e.seasons  = p.id');
-  
-   return $query->execute();
-}
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT e.title, e.slug, e.beginAt, p.name, p.poster FROM App\Entity\Episode e JOIN App\Entity\Program p where e.seasons  = p.id');
 
-
-    // $query = $em->createQuery('SELECT p, c, a FROM App\Entity\Program p INNER JOIN p.category c LEFT JOIN p.actors a');
+        return $query->execute();
+    }
 }
