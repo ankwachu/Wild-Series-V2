@@ -16,7 +16,7 @@ class DefaultController extends AbstractController
     public function index(EpisodeRepository $episodeRepository) :Response
     {        
         return $this->render ('index.html.twig', [
-            'episodes' => $episodeRepository->findByDate(),
+            'episodes' => $episodeRepository->findByDateExpiration(),
         ]);
     }
 }

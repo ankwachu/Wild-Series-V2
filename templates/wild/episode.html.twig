@@ -5,9 +5,9 @@
 {% block body %}
 
     <div class="media">
-        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.name }} poster">
         <div class="media-body">
-            <a href="{{ path('wild_show', {'slug': program.slug }) }}"><h1 class="mt-0">{{ program.title|capitalize }}</h1></a>
+            <a href="{{ path('wild_show', {'slug': program.slug }) }}"><h1 class="mt-0">{{ program.name|capitalize }}</h1></a>
             <p>Categorie : {{ program.category.name }}</p>
             <a href="{{ path('wild_season', {'id': season.id}) }}">
                 <h2>Saison {{ season.number }}</h2>
