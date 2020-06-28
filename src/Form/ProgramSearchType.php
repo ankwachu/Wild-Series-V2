@@ -13,6 +13,7 @@ class ProgramSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, [
+            'required' => false,
             'label' => 'Chercher une série',
         ]);
     }
@@ -21,6 +22,8 @@ class ProgramSearchType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Program::class,
+            'csrf_protection' => false,
+            'method' => 'get'
         ]);
     }
 }

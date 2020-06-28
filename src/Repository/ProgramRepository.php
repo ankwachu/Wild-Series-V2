@@ -27,11 +27,11 @@ class ProgramRepository extends ServiceEntityRepository
 
     public function search($name)
     {
-        return $this->createQueryBuilder('p')
+        $query = $this->createQueryBuilder('p')
             ->andWhere('p.name LIKE :name')
-            ->setParameter('name', '%' . $name . '%')
-            ->getQuery()
-            ->execute();
+            ->setParameter('name', '%' . $name . '%');
+            $query->orderBy('p.name', 'ASC');
+            return $query->getQuery()->getResult();
     }
 
     /**

@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/wild", name="wild_")
@@ -25,21 +26,25 @@ class WildController extends AbstractController
      * @Route("/series", name="programs")
      */
 
-    public function index(Request $request, ProgramRepository $programRepository): Response
+    public function index(Request $request, ProgramRepository $programRepository, PaginatorInterface $paginator): Response
     {
-        $programs = $programRepository->findAll();
-        // if (!$programs) {
-        //     throw $this->createNotFoundException(
-        //         'No program found in program\'s table.'
-        //     );
-        // }
+        $programs = $paginator->paginate(
+            $programRepository->findAll(),
+            $request->query->getInt('page', 1),
+            6
+        );
 
         $form = $this->createForm(ProgramSearchType::class);
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
             $title = $form->getData()->getName();
-            $programs = $programRepository->search($title);
+            // $programs = $programRepository->search($title);
+            $programs = $paginator->paginate(
+                $programRepository->search($title),
+                $request->query->getInt('page', 1),
+                3
+            );
         }
 
         return $this->render('wild/index.html.twig', [
