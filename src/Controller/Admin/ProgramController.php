@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Program;
 use App\Form\ProgramType;
@@ -28,11 +28,11 @@ class ProgramController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $title = $form->getData()->getTitle();
+            $title = $form->getData()->getName();
             $programs = $programRepository->search($title);
         }
 
-        return $this->render('program/index.html.twig', [
+        return $this->render('admin/program/index.html.twig', [
             'programs' => $programs,
             'form' => $form->createView(),
         ]);
@@ -55,7 +55,7 @@ class ProgramController extends AbstractController
             return $this->redirectToRoute('program_index');
         }
 
-        return $this->render('program/new.html.twig', [
+        return $this->render('admin/program/new.html.twig', [
             'program' => $program,
             'form' => $form->createView(),
         ]);
@@ -66,7 +66,7 @@ class ProgramController extends AbstractController
      */
     public function show(Program $program): Response
     {
-        return $this->render('program/show.html.twig', [
+        return $this->render('admin/program/show.html.twig', [
             'program' => $program,
         ]);
     }
@@ -85,7 +85,7 @@ class ProgramController extends AbstractController
             return $this->redirectToRoute('program_index');
         }
 
-        return $this->render('program/edit.html.twig', [
+        return $this->render('admin/program/edit.html.twig', [
             'program' => $program,
             'form' => $form->createView(),
         ]);

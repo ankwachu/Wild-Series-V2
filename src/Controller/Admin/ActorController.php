@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Actor;
 use App\Form\ActorType;
@@ -20,7 +20,7 @@ class ActorController extends AbstractController
      */
     public function index(ActorRepository $actorRepository): Response
     {
-        return $this->render('actor/index.html.twig', [
+        return $this->render('admin/actor/index.html.twig', [
             'actors' => $actorRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class ActorController extends AbstractController
             return $this->redirectToRoute('actor_index');
         }
 
-        return $this->render('actor/new.html.twig', [
+        return $this->render('admin/actor/new.html.twig', [
             'actor' => $actor,
             'form' => $form->createView(),
         ]);
@@ -54,7 +54,7 @@ class ActorController extends AbstractController
      */
     public function show(Actor $actor): Response
     {
-        return $this->render('actor/show.html.twig', [
+        return $this->render('admin/actor/show.html.twig', [
             'actor' => $actor,
         ]);
     }
@@ -74,7 +74,7 @@ class ActorController extends AbstractController
             return $this->redirectToRoute('actor_index');
         }
 
-        return $this->render('actor/edit.html.twig', [
+        return $this->render('admin/actor/edit.html.twig', [
             'actor' => $actor,
             'form' => $form->createView(),
         ]);

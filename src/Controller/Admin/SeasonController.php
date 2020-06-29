@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Season;
 use App\Form\SeasonType;
@@ -20,7 +20,7 @@ class SeasonController extends AbstractController
      */
     public function index(SeasonRepository $seasonRepository): Response
     {
-        return $this->render('season/index.html.twig', [
+        return $this->render('admin/season/index.html.twig', [
             'seasons' => $seasonRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class SeasonController extends AbstractController
             return $this->redirectToRoute('season_index');
         }
 
-        return $this->render('season/new.html.twig', [
+        return $this->render('admin/season/new.html.twig', [
             'season' => $season,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class SeasonController extends AbstractController
      */
     public function show(Season $season): Response
     {
-        return $this->render('season/show.html.twig', [
+        return $this->render('admin/season/show.html.twig', [
             'season' => $season,
         ]);
     }
@@ -72,7 +72,7 @@ class SeasonController extends AbstractController
             return $this->redirectToRoute('season_index');
         }
 
-        return $this->render('season/edit.html.twig', [
+        return $this->render('admin/season/edit.html.twig', [
             'season' => $season,
             'form' => $form->createView(),
         ]);

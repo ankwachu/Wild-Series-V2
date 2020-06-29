@@ -31,7 +31,7 @@ class WildController extends AbstractController
         $programs = $paginator->paginate(
             $programRepository->findAll(),
             $request->query->getInt('page', 1),
-            6
+            10
         );
 
         $form = $this->createForm(ProgramSearchType::class);

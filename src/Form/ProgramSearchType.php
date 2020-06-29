@@ -15,6 +15,9 @@ class ProgramSearchType extends AbstractType
         $builder->add('name', TextType::class, [
             'required' => false,
             'label' => 'Chercher une série',
+            'attr' => [
+                'placeholder' => 'Game of Thrones'
+            ]
         ]);
     }
 

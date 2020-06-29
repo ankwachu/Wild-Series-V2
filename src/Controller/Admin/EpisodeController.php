@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Episode;
 use App\Form\EpisodeType;
@@ -28,7 +28,7 @@ class EpisodeController extends AbstractController
      */
     public function index(EpisodeRepository $episodeRepository): Response
     {
-        return $this->render('episode/index.html.twig', [
+        return $this->render('admin/episode/index.html.twig', [
             'episodes' => $episodeRepository->findAll(),
         ]);
     }
@@ -50,7 +50,7 @@ class EpisodeController extends AbstractController
             return $this->redirectToRoute('episode_index');
         }
 
-        return $this->render('episode/new.html.twig', [
+        return $this->render('admin/episode/new.html.twig', [
             'episode' => $episode,
             'form' => $form->createView(),
         ]);
@@ -62,7 +62,7 @@ class EpisodeController extends AbstractController
      */
     public function show(Episode $episode): Response
     {
-        return $this->render('episode/show.html.twig', [
+        return $this->render('admin/episode/show.html.twig', [
             'episode' => $episode,
         ]);
     }
@@ -82,7 +82,7 @@ class EpisodeController extends AbstractController
             return $this->redirectToRoute('episode_index');
         }
 
-        return $this->render('episode/edit.html.twig', [
+        return $this->render('admin/episode/edit.html.twig', [
             'episode' => $episode,
             'form' => $form->createView(),
         ]);
