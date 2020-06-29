@@ -10,20 +10,23 @@ use phpDocumentor\Reflection\Types\Self_;
 class CategoryFixtures extends Fixture
 {
     const CATEGORIES = [
-        'Action',
-        'Aventure',
-        'Animation',
-        'Fantastique',
-        'Horreur',
+        'Action' => '#ffb300',
+        'Aventure' => '#00897b',
+        'Romance' => '#d81b60',
+        'Fantastique' => '#424242',
+        'Horreur' => '#d84315',
     ];
 
     public function load(ObjectManager $manager)
     {
-        foreach (Self::CATEGORIES as $keys => $categoryName){
+        $index = 0;
+        foreach (Self::CATEGORIES as $key => $data){
             $category = new Category();
-            $category->setName($categoryName);
+            $category->setName($key);
+            $category->setColor($data);
+            $this->addReference('categorie_' . $index, $category);
             $manager->persist($category);
-            $this->addReference('categorie_' . $keys, $category);
+            $index ++;
         }
         $manager->flush();
     }

@@ -25,8 +25,11 @@
                 <a href="{{ path('wild_show', { 'slug': program.slug}) }}">
                     <h2>{{ loop.index }}/
                         {{ program.name|title }}
-                        - Catégorie :
-                        {{ program.category.name }}</h2>
+                        <small>
+                        <span class="badge badge-secondary" style="background: {{ program.category.color }}">
+                        {{ program.category.name }}</span>
+                        </small>
+                    </h2>
                 </a>
             </div>
         {% else %}

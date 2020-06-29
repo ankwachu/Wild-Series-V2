@@ -34,6 +34,11 @@ class Category
      */
     private $programs;
 
+    /**
+     * @ORM\Column(type="string", length=7)
+     */
+    private $color;
+
     public function __construct()
     {
         $this->programs = new ArrayCollection();
@@ -83,6 +88,18 @@ class Category
                 $program->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }
