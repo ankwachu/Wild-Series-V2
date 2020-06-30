@@ -12,8 +12,10 @@
                 <a href="{{ path('wild_show', {'slug': program.slug}) }}">
                     <h1 class="mt-0">{{ program.name|capitalize }}</h1>
                 </a>
-                <p>Categorie :
-                    {{ program.category.name }}</p>
+                <p><strong>Catégorie</strong>
+                    <span class="badge badge-secondary" style="background: {{ program.category.color }}">
+                        {{ program.category.name }}</span>
+                </p>
                 <h2>Saison
                     {{ season.number }}</h2>
                 {% for episode in episodes %}

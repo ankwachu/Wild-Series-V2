@@ -1,42 +1,23 @@
+// Variables must be called before imports
+$test: lighten(#428bca, 40%);
+$secondary: yellow;
+
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
-
-// customize some Bootstrap variables
-$primary: lighten(#428bca, 40%);
-
-body {
-  background-color: $primary;
-}
+@import "partials/_card.scss";
+@import "partials/_form.scss";
 
 .layout {
   margin: 15px;
 }
 
-img {
-  width: 25%;
-}
-
-.form {
-  padding: 1em;
-}
-.form-group {
-  flex-direction: column;
-}
-
-.label-form {
-  label {
-    font-size: 26px;
-    max-width: 350px !important;
-  }
-}
-
 .background-wallpaper {
-  background: url("../images/horror_movie.svg") no-repeat;
-  height: 400px;
+  background: url("../images/woman-popcorn.webp") no-repeat center;
+  // height: 40vh;
   background-size: contain;
-  // background-position: ; 
 }
 
+// Calendar
 .fc-time::after {
   content: "-";
   padding: 4px;

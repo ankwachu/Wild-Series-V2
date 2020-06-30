@@ -1,0 +1,15 @@
+.form {
+  padding: 1em;
+}
+
+.form-group {
+  flex-direction: column;
+}
+
+.label-form {
+  background-color: $test;
+  label {
+    font-size: 26px;
+    max-width: 350px !important;
+  }
+}

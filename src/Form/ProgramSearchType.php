@@ -13,8 +13,7 @@ class ProgramSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, [
-            'required' => false,
-            'label' => 'Chercher une série',
+            'label' => 'Trouver une série',
             'attr' => [
                 'placeholder' => 'Game of Thrones'
             ]

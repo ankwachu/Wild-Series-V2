@@ -5,41 +5,45 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12 col-lg-6 label-form">
+        <div class="col-12 col-lg-6 label-form p-5">
         <h1>Toutes les séries :</h1>
             {{ form_start(form) }}
             {{ form_row(form.name) }}
-            <button type="submit" class="btn btn-primary">Rechercher</button>
-            <a href="{{ path('wild_programs') }}" class="btn btn-primary">Toutes les séries</a>
+            <div class="mt-2">
+            <button type="submit" class="btn btn-primary mr-3">Rechercher</button>
+            <a href="{{ path('wild_programs') }}" class="btn btn-primary mr-3">Toutes les séries</a>
             <a href="{{ path('app_index') }}" class="btn btn-info">Retour à l'accueil</a>
+            </div>
             {{ form_end(form) }}
+        </div>
+        <div class="col-lg-6 background-wallpaper">
         </div>
     </div>
     <div class="row mt-4">
         <h3 class="col-12">Résultat: {{ programs|length }} séries</h3>
     </div>
     <div class="row">
-    <div class="col-12 mt-2">
-        {% for program in programs %}
-            <div>
-                <a href="{{ path('wild_show', { 'slug': program.slug}) }}">
-                    <h2>{{ loop.index }}/
-                        {{ program.name|title }}
-                        <small>
-                        <span class="badge badge-secondary" style="background: {{ program.category.color }}">
-                        {{ program.category.name }}</span>
-                        </small>
-                    </h2>
-                </a>
+        <div class="col-12 mt-2">
+            {% for program in programs %}
+                <div>
+                    <a href="{{ path('wild_show', { 'slug': program.slug}) }}">
+                        <h2>{{ loop.index }}/
+                            {{ program.name|title }}
+                    </a>
+                            <small>
+                            <span class="badge badge-secondary" style="background: {{ program.category.color }}">
+                            {{ program.category.name }}</span>
+                            </small>
+                        </h2>
+                </div>
+            {% else %}
+                <div>
+                    <h2>Aucune série trouvée.</h2>
+                </div>
+            {% endfor %}
+            <div class="navigation">
+                {{ knp_pagination_render(programs) }}
             </div>
-        {% else %}
-            <div>
-                <h2>Aucune série trouvée.</h2>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="navigation">
-    {{ knp_pagination_render(programs) }}
-</div>
+        </div>
     </div>
 {% endblock %}

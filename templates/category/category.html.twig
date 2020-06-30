@@ -5,11 +5,11 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12 col-lg-6 label-form">
+        <div class="col-12 col-lg-6 label-form p-5">
             <h1>Toutes les catégories :</h1>
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <button class="btn btn-primary">Rechercher</button>
+            <button class="btn btn-primary mr-3">Rechercher</button>
             <a href="{{ path('app_index') }}" class="btn btn-info">Retour à l'accueil</a>
             {{ form_end(form) }}
         </div>
@@ -24,15 +24,15 @@
         {% endif %}
 
         {% for program in programs %}
-            <div class="card m-4" style="width: 18rem;">
-                <img src="{{ program.poster }}" class="card-img-top" alt="{{ program.name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ program.name }}</h5>
-                        {# <p class="card-text">{{ program.summary }}</p> #}
-                        <a href="{{ path('wild_show', { 'slug': program.slug}) }}" class="btn btn-primary">En savoir plus</a>
+            <div class="card m-4" style="width: 14rem;">
+                <img src="{{ program.poster }}" class="poster" alt="{{ program.name }}">
+                    <div class="card-body text-center">
+                        <a href="{{ path('wild_show', { 'slug': program.slug}) }}">
+                            <h5 class="card-title">{{ program.name | upper}}</h5>
+                        </a>
                     </div>
                 </div>
             {% endfor %}
         </div>
 
-    {% endblock %}
+{% endblock %}
