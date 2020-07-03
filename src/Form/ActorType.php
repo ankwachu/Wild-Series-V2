@@ -17,7 +17,7 @@ class ActorType extends AbstractType
             ->add('name')
             ->add('programs',EntityType::class, [
                 'class' => Program::class,
-                'choice_label' => 'title',
+                'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false
