@@ -10,7 +10,7 @@ use App\Repository\EpisodeRepository;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="app_index")
+     * @Route("/", name="home")
     */
 
     public function index(EpisodeRepository $episodeRepository) :Response

@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/episode")
@@ -16,15 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class EpisodeController extends AbstractController
 {
     /**
-     * @Route("/calendar", name="episode_calendar", methods={"GET"})
-     */
-    public function calendar(): Response
-    {
-        return $this->render('wild/calendar.html.twig');
-    }
-
-    /**
      * @Route("/", name="episode_index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(EpisodeRepository $episodeRepository): Response
     {
@@ -93,7 +87,7 @@ class EpisodeController extends AbstractController
      */
     public function delete(Request $request, Episode $episode): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$episode->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $episode->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($episode);
             $entityManager->flush();

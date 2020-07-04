@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% set page = 'category' %}
 
 {% block title %}Catégories
 {% endblock %}
@@ -10,7 +11,7 @@
             {{ form_start(form) }}
             {{ form_widget(form) }}
             <button class="btn btn-primary mr-3">Rechercher</button>
-            <a href="{{ path('app_index') }}" class="btn btn-info">Retour à l'accueil</a>
+            <a href="{{ path('home') }}" class="btn btn-info">Retour à l'accueil</a>
             {{ form_end(form) }}
         </div>
     </div>

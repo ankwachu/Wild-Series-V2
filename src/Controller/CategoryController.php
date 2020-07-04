@@ -11,11 +11,13 @@ use App\Form\CategorySearchType;
 use App\Repository\ProgramRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class CategoryController extends AbstractController
 {
     /**
      * @Route("/category", name="category")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function add(Request $request): Response
     {

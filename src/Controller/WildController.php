@@ -43,7 +43,7 @@ class WildController extends AbstractController
             $programs = $paginator->paginate(
                 $programRepository->search($title),
                 $request->query->getInt('page', 1),
-                3
+                10
             );
         }
 
@@ -156,5 +156,14 @@ class WildController extends AbstractController
             "actor" => $actor,
             "programs" => $program,
         ]);
+    }
+
+    /**
+     * @Route("/calendar", name="calendar", methods={"GET"})
+     *  
+     */
+    public function calendar(): Response
+    {
+        return $this->render('wild/calendar.html.twig');
     }
 }

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ProgramSearchType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 /**
  * @Route("/program")
  */
@@ -17,6 +19,7 @@ class ProgramController extends AbstractController
 {
     /**
      * @Route("/", name="program_index", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN") 
      */
     public function index(ProgramRepository $programRepository, Request $request): Response
     {
@@ -27,7 +30,7 @@ class ProgramController extends AbstractController
         $form = $this->createForm(ProgramSearchType::class);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $title = $form->getData()->getName();
             $programs = $programRepository->search($title);
         }
@@ -96,7 +99,7 @@ class ProgramController extends AbstractController
      */
     public function delete(Request $request, Program $program): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$program->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $program->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($program);
             $entityManager->flush();
