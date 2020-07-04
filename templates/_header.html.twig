@@ -26,16 +26,16 @@
 
                 {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('program_index') }}">Program CRUD</a>
+                    <a class="nav-link {% if 'program_index' in app.request.attributes.get('_route') %}active{% endif %}" href="{{ path('program_index') }}">Program CRUD</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('season_index') }}">Season CRUD</a>
+                    <a class="nav-link {% if 'season_index' in app.request.attributes.get('_route') %}active{% endif %}" href="{{ path('season_index') }}">Season CRUD</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('episode_index') }}">Episode CRUD</a>
+                    <a class="nav-link {% if 'episode_index' in app.request.attributes.get('_route') %}active{% endif %}" href="{{ path('episode_index') }}">Episode CRUD</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('actor_index') }}">Actor CRUD</a>
+                    <a class="nav-link {% if 'actor_index' in app.request.attributes.get('_route') %}active{% endif %}" href="{{ path('actor_index') }}">Actor CRUD</a>
                 </li>
                 {% endif %}
                 
