@@ -7,9 +7,14 @@
 }
 
 .label-form {
-  background-color: $test;
   label {
     font-size: 26px;
     max-width: 350px !important;
+    padding: 0 !important;
   }
+  
+}
+
+.col-sm-10 {
+  padding:  1em 0 1em 0!important;
 }

@@ -1,19 +1,41 @@
-// Variables must be called before imports
-$test: lighten(#428bca, 40%);
-$secondary: yellow;
-
-// the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
+
+@import "partials/_vars.scss";
 @import "partials/_card.scss";
+@import "partials/_jumbotron.scss";
 @import "partials/_form.scss";
 
-.layout {
-  margin: 15px;
+
+@mixin headings($from: 1, $to: 6) {
+  @for $i from $from through $to {
+      h#{$i} {
+          @content
+      }
+  }
+}
+
+@include headings() {
+  font-family: $title-font;
+  letter-spacing: 1px;
+}
+
+.container {
+  padding: 0 !important;
+  background-color: $secondary;
+}
+
+.row {
+  margin: 0 !important;
 }
 
 .background-wallpaper {
   background: url("../images/woman-popcorn.webp") no-repeat center;
   // height: 40vh;
+  background-size: contain;
+}
+.background-home {
+  background: url("../images/woman.webp") no-repeat;
+  // height: 88vh;
   background-size: contain;
 }
 

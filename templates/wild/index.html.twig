@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="jumbox">
     <div class="row">
         <div class="col-12 col-lg-6 label-form p-5">
         <h1>Toutes les séries :</h1>
@@ -13,13 +14,14 @@
             <div class="mt-2">
             <button type="submit" class="btn btn-primary mr-3">Rechercher</button>
             <a href="{{ path('wild_programs') }}" class="btn btn-primary mr-3">Toutes les séries</a>
-            <a href="{{ path('home') }}" class="btn btn-info">Retour à l'accueil</a>
+            <a href="{{ path('homepage') }}" class="btn btn-info">Retour à l'accueil</a>
             </div>
             {{ form_end(form) }}
         </div>
         <div class="col-lg-6 background-wallpaper">
         </div>
     </div>
+   </div> 
     <div class="row mt-4">
         <h3 class="col-12">Résultat: {{ programs|length }} séries</h3>
     </div>

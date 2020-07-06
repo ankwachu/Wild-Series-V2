@@ -6,17 +6,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EpisodeRepository;
-
+use App\Repository\ProgramRepository;
+use App\Entity\Program;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="homepage")
     */
 
-    public function index(EpisodeRepository $episodeRepository) :Response
+    public function homepage() :Response
     {        
+        $programs = $this->getDoctrine()
+            ->getRepository(Program::class)
+            ->findBy([],
+                    ['id' => 'DESC'],
+                    3
+            );
+
         return $this->render ('index.html.twig', [
-            'episodes' => $episodeRepository->findByDate(),
+            'programs' => $programs,
         ]);
     }
 }

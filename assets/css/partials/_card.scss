@@ -1,29 +1,17 @@
 .card {
-  position: relative;
-  
-  &:hover {
-    transition-duration: 0.15s;
-    transform: scale(1.04);
-  }
+  border-radius: 0 !important;
+  border: 0 !important;
 }
 
-.poster {
+.card-img {
+  border: 0 !important;
+  border-radius: 0 !important;
   width: 100%;
-  object-fit: cover;
+  height: 30vh;
+  object-fit: contain;
 }
 
 .card-title {
-  color: whitesmoke;
-}
-
-.card-body {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 40%;
-  background-color: rgba(229, 224, 224, 0.4);
-  color: whitesmoke;
-  &:hover {
-    background-color: yellowgreen;
-  }
+  font-weight: bold;
+  font-size: 26px;
 }

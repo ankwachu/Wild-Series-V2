@@ -21,7 +21,7 @@ class EpisodeRepository extends ServiceEntityRepository
         parent::__construct($registry, Episode::class);
     }
 
-    const NUMBER_DATES = 12;
+    const NUMBER_DATES = 3;
 
     public function findByDateExpiration()
     {

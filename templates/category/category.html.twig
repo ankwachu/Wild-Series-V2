@@ -11,28 +11,33 @@
             {{ form_start(form) }}
             {{ form_widget(form) }}
             <button class="btn btn-primary mr-3">Rechercher</button>
-            <a href="{{ path('home') }}" class="btn btn-info">Retour à l'accueil</a>
+            <a href="{{ path('homepage') }}" class="btn btn-info">Retour à l'accueil</a>
             {{ form_end(form) }}
+        </div>
+        <div class="col-lg-6 background-home">
         </div>
     </div>
     <div class="row mt-4">
         <h3 class="col-12">Résultat: {{ programs|length }} séries</h3>
     </div>
-    <div class="row">
+    <div class="row no-gutters">
         {% if programs is empty %}
             <h3>pas de séries disponibles
             </h3>
         {% endif %}
 
         {% for program in programs %}
-            <div class="card m-4" style="width: 14rem;">
-                <img src="{{ program.poster }}" class="poster" alt="{{ program.name }}">
+        <div class="col-md-3 mb-3">
+        <div class="card" style="width: 14rem;">
+                <img src="{{ program.poster }}" class="card-img" alt="{{ program.name }}">
                     <div class="card-body text-center">
                         <a href="{{ path('wild_show', { 'slug': program.slug}) }}">
                             <h5 class="card-title">{{ program.name | upper}}</h5>
                         </a>
                     </div>
                 </div>
+        </div>
+            
             {% endfor %}
         </div>
 

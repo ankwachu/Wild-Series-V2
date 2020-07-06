@@ -1,45 +1,45 @@
 {% extends "base.html.twig" %}
-{% set page = 'home' %}
 
 {% block body %}
-    <h1>Bienvenue !</h1>
-    <div>
-        <a href="{{ path('wild_show', { 'slug': "walking-dead" }) }}">
-            Testing show() method from WildController with a real programs slug.
-        </a>
+    <div class="jumbox j-home">
+            <h1 class="display-4">Bienvenue sur Wild Séries !</h1>
+            <p class="lead">And even answers for those questions you didn't think to ask!</p>
+            {# <img src="{{asset('build/images/woman.webp')}}" alt=""> #}
     </div>
-    <div>
-        <a href="{{ path('wild_programs') }}">
-            Testing index() method from WildController to view all programs.
-        </a>
-    </div>
-    {% if is_granted('ROLE_ADMIN') %}
-    <div>
-        <a href="{{ path('category') }}">
-            Créer une catégorie
-        </a>
-    </div>
-    {% endif %}
-    {# {{ dump(episodes) }} #}
 
-    {# {% for episode in episodes %}
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-                <div
-                    class="col-md-4"><img src="{{episode.poster}}" class="card-img" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div
-                        class="card-body">
-                        <h5 class="card-title">{{episode.name}}</h5>
-                        <p class="card-text">{{ episode.title }}</p>
-                        <p class="card-text">
-                            <small class="text-muted">{{ episode.beginAt|format_datetime('full', 'short', locale='fr') | capitalize }}</small>
-                        </p>
+    {# <div class="container" style="background-color:blue;"> #}
+        <div class="row">
+        <h2 class="col-12 pl-4">Les nouvelles séries</h2>
+            {% for program in programs %}
+                <div class="col-md-4 mb-3">
+                    <div class="card mx-auto" style="width: 21rem;">
+                        <img src="{{ program.poster }}" class="card-img" alt="...">
+                            <div class="card-body pl-0">
+                                <h5 class="card-title">{{ program.name }}
+                                <span class="badge badge-secondary mt-2" style="background: {{ program.category.color }}">
+                                    {{ program.category.name }}</span>
+                                </h5>
+                                <p class="card-text">{{ program.summary |u.truncate(160, '...',false) }}</p>
+                                <a href="{{ path('wild_show', { 'slug': program.slug}) }}" class="card-link">En voir plus ></a>
+                            </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-        </div>
-    {% endfor %} #}
 
+
+            <div class="row">
+            <div class="col 12 d-flex justify-content-between align-items-center px-4">
+            <h2>Ce soir à la télévision</h2>
+            <a href="{{ path('wild_calendar') }}">Voir l'agenda des séries ></a>
+            </div>
+            </div>
+        {# </div> #}
+
+{# {% if is_granted('ROLE_ADMIN') %}
+    <div>
+        <a href="{{ path('category') }}">Créer une catégorie</a>
+    </div>
+    {% endif %} #}
+    {# {{ dump(episodes) }} #}
 {% endblock %}
