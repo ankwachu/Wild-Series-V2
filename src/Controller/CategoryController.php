@@ -39,7 +39,7 @@ class CategoryController extends AbstractController
             ->getRepository(Category::class)
             ->findBy(
                 array(), 
-                array('name' => 'ASC')
+                array('title' => 'ASC')
               );
 
         return $this->render('category/index.html.twig', [
@@ -109,7 +109,7 @@ class CategoryController extends AbstractController
         } else {
             $programs = $programRepository->findBy(
                 [],
-                ['name' => 'ASC']
+                ['title' => 'ASC']
             );
         }
 

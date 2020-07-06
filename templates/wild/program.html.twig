@@ -7,9 +7,9 @@
 {% block body %}
 
     <div class="media">
-        <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.name }} poster">
+        <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
             <div class="media-body">
-                <h1 class="mt-0">{{ program.name|capitalize }}</h1>
+                <h1 class="mt-0">{{ program.title|capitalize }}</h1>
                 <p>{{ program.summary }}</p>
                 <p><strong>Catégorie</strong>
                     <span class="badge badge-secondary" style="background: {{ program.category.color }}">

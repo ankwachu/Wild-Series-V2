@@ -69,7 +69,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i = 0; $i < 20; $i++){
             $program = new Program();
-            $program->setName($faker->realText($maxNbChars = 30));
+            $program->setTitle($faker->realText($maxNbChars = 30));
             $program->setSummary($faker->realText($maxNbChars = 500));
             $program->setPoster('https://www.fillmurray.com/200/300');
             // $program->setPoster($faker->imageUrl($width = 640, $height = 480));

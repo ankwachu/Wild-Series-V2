@@ -9,7 +9,7 @@
     <div class="row mb-4">
         <div class="col-12 col-lg-4 label-form">
             {{ form_start(form) }}
-            {{ form_row(form.name) }}
+            {{ form_row(form.title) }}
             <button type="submit" class="btn btn-primary">Rechercher</button>
             <a href="{{ path('program_index') }}" class="btn btn-primary">Toutes les séries</a>
             {{ form_end(form) }}
@@ -29,7 +29,7 @@
         <tbody>
             {% for program in programs %}
                 <tr>
-                    <td>{{ program.name }}</td>
+                    <td>{{ program.title }}</td>
                     <td>{{ program.summary }}</td>
                     <td>
                         <img src="{{ program.poster }}" alt=""></td>

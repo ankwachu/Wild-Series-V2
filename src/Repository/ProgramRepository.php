@@ -22,15 +22,15 @@ class ProgramRepository extends ServiceEntityRepository
 
     public function findAll()
     {
-        return $this->findBy(array(), array('name' => 'ASC'));
+        return $this->findBy(array(), array('title' => 'ASC'));
     }
 
-    public function search($name)
+    public function search($title)
     {
         $query = $this->createQueryBuilder('p')
-            ->andWhere('p.name LIKE :name')
-            ->setParameter('name', '%' . $name . '%');
-            $query->orderBy('p.name', 'ASC');
+            ->andWhere('p.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%');
+            $query->orderBy('p.title', 'ASC');
             return $query->getQuery()->getResult();
     }
 
@@ -45,7 +45,7 @@ class ProgramRepository extends ServiceEntityRepository
         if ($category == empty([$qb])) {
             return $qb = $this->findAll();
         }
-        $qb->orderBy('p.name', 'ASC');
+        $qb->orderBy('p.title', 'ASC');
 
         return $qb->getQuery()->getResult();
     }

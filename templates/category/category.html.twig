@@ -29,10 +29,10 @@
         {% for program in programs %}
         <div class="col-md-3 mb-3">
         <div class="card" style="width: 14rem;">
-                <img src="{{ program.poster }}" class="card-img" alt="{{ program.name }}">
+                <img src="{{ program.poster }}" class="card-img" alt="{{ program.title }}">
                     <div class="card-body text-center">
                         <a href="{{ path('wild_show', { 'slug': program.slug}) }}">
-                            <h5 class="card-title">{{ program.name | upper}}</h5>
+                            <h5 class="card-title">{{ program.title | upper}}</h5>
                         </a>
                     </div>
                 </div>

@@ -5,9 +5,9 @@
 {% block body %}
 
     <div class="media">
-        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.name }} poster">
+        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
         <div class="media-body">
-            <a href="{{ path('wild_show', {'slug': program.slug }) }}"><h1 class="mt-0">{{ program.name|capitalize }}</h1></a>
+            <a href="{{ path('wild_show', {'slug': program.slug }) }}"><h1 class="mt-0">{{ program.title|capitalize }}</h1></a>
             <p>
                 <strong>Catégorie</strong>
                     <span class="badge badge-secondary" style="background: {{ program.category.color }}">
@@ -19,7 +19,6 @@
                 <h3>Episode {{ episode.number }} : {{ episode.title|capitalize }}</h3>
                 <p>{{ episode.beginAt|format_datetime('full', 'short', locale='fr') | capitalize}}</p>
                 <p>{{ episode.synopsis }}</p>
-
             <a href="{{ path('wild_programs') }}" class="btn btn-info">
                 Retour à l'accueil
             </a>

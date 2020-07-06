@@ -10,7 +10,7 @@
         <div class="col-12 col-lg-6 label-form p-5">
         <h1>Toutes les séries :</h1>
             {{ form_start(form) }}
-            {{ form_row(form.name) }}
+            {{ form_row(form.title) }}
             <div class="mt-2">
             <button type="submit" class="btn btn-primary mr-3">Rechercher</button>
             <a href="{{ path('wild_programs') }}" class="btn btn-primary mr-3">Toutes les séries</a>
@@ -31,7 +31,7 @@
                 <div>
                     <a href="{{ path('wild_show', { 'slug': program.slug}) }}">
                         <h2>{{ loop.index }}/
-                            {{ program.name|title }}
+                            {{ program.title|title }}
                     </a>
                             <small>
                             <span class="badge badge-secondary" style="background: {{ program.category.color }}">

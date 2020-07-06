@@ -38,7 +38,7 @@ class WildController extends AbstractController
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
-            $title = $form->getData()->getName();
+            $title = $form->getData()->getTitle();
             // $programs = $programRepository->search($title);
             $programs = $paginator->paginate(
                 $programRepository->search($title),
