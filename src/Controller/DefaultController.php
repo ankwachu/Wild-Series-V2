@@ -14,7 +14,7 @@ class DefaultController extends AbstractController
      * @Route("/", name="homepage")
     */
 
-    public function homepage() :Response
+    public function homepage(EpisodeRepository $episodeRepository) :Response
     {        
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
@@ -23,8 +23,10 @@ class DefaultController extends AbstractController
                     3
             );
 
-        return $this->render ('index.html.twig', [
+        
+        return $this->render ('homepage/index.html.twig', [
             'programs' => $programs,
+            'episodes' => $episodeRepository->findByDateExpiration(),
         ]);
     }
 }

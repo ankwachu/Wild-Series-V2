@@ -41,6 +41,9 @@
                 
             </ul>
             {% if app.user %}
+                {% if is_granted('ROLE_ADMIN') %}
+                <i class="fab fa-dev"></i>
+                {% endif %}
                 <span class="badge">{{ app.user.email }}</span>
                 <a href="{{ path('app_logout') }}" class="btn btn-danger">
                     Se déconnecter</a>

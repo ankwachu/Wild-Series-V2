@@ -23,9 +23,9 @@ class SeasonType extends AbstractType
                 'class' => Program::class,
                 'query_builder' => function (ProgramRepository $er) {
                     return $er->createQueryBuilder('p')
-                        ->orderBy('p.name', 'ASC');
+                        ->orderBy('p.title', 'ASC');
                 },
-                'choice_label' => 'name'
+                'choice_label' => 'title'
             ]);
     }
 

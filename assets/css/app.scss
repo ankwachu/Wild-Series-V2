@@ -1,10 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
 
 @import "partials/_vars.scss";
-@import "partials/_card.scss";
-@import "partials/_jumbotron.scss";
-@import "partials/_form.scss";
+@import "partials/_card";
+@import "partials/_jumbotron";
+@import "partials/_form";
 
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/css/fontawesome';
+@import '~@fortawesome/fontawesome-free/css/solid';
+@import '~@fortawesome/fontawesome-free/css/regular';
+@import '~@fortawesome/fontawesome-free/css/brands';
 
 @mixin headings($from: 1, $to: 6) {
   @for $i from $from through $to {
@@ -21,7 +26,7 @@
 
 .container {
   padding: 0 !important;
-  background-color: $secondary;
+  background-color: $light;
 }
 
 .row {
@@ -43,4 +48,17 @@
 .fc-time::after {
   content: "-";
   padding: 4px;
+}
+
+.c-badge {
+  font-size: 1rem;
+  color: whitesmoke;
+  padding: .25em .4em;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: .25rem; 
+}
+
+.agenda {
+  background: $dark;
 }

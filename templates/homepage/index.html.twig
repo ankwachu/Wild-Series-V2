@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="jumbox j-home">
+        <h1 class="display-4">Bienvenue sur Wild Séries !</h1>
+        <p class="lead">And even answers for those questions you didn't think to ask!</p>
+        {# <img src="{{asset('build/images/woman.webp')}}" alt=""> #}
+    </div>
+
+    <div class="row mt-3">
+        <h2 class="col-12 pl-4">Les nouveautés</h2>
+        {% for program in programs %}
+            <div class="col-md-4 mb-2">
+                <div class="card mx-auto" style="width: 21rem;">
+                    <img src="{{ program.poster }}" class="card-img" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ program.title }}</h4>
+                            <span class="c-badge" style="background: {{ program.category.color }}">
+                                {{ program.category.name }}</span>
+                            <p class="card-text mt-2">{{ program.summary |u.truncate(160, '...',false) }}</p>
+                            <a href="{{ path('wild_show', { 'slug': program.slug}) }}" class="card-link">En voir plus ></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row px-2 mt-3 agenda">
+            <div class="col-12 d-flex justify-content-between align-items-center px-4">
+                <h2>Ce soir à la télévision</h2>
+                <a href="{{ path('wild_calendar') }}">Voir l'agenda des séries ></a>
+            </div>
+            {% for episode in episodes %}
+                <div class="col-md-3 mb-3">
+                    <div class="card mx-auto">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ episode.seasons.program.title }}</h4>
+                            <p>{{ episode.beginAt|format_datetime('full', 'short', locale='fr') | capitalize }}</p>
+                            <a href="{{ path('wild_episode', { 'slug': episode.slug}) }}" class="card-link">Fiche de l'épisode ></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {# {% if is_granted('ROLE_ADMIN') %}
+            <div>
+                <a href="{{ path('category') }}">Créer une catégorie</a>
+            </div>
+            {% endif %} #}
+        {# {{ dump(episodes) }} #}
+    {% endblock %}
