@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category", name="category")
+     * @Route("/category", name="app_category")
      * @IsGranted("ROLE_ADMIN")
      */
     public function add(Request $request): Response
@@ -39,7 +39,7 @@ class CategoryController extends AbstractController
             ->getRepository(Category::class)
             ->findBy(
                 array(), 
-                array('title' => 'ASC')
+                array('name' => 'ASC')
               );
 
         return $this->render('category/index.html.twig', [

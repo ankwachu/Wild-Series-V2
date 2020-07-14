@@ -5,20 +5,23 @@
 {% endblock %}
 
 {% block body %}
-
-    <div class="media">
-        <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
-            <div class="media-body">
+    <div class="row">
+        <div class="col-6">
+                <img class="img-fluid" src="{{ program.poster }}" alt="{{ program.title }} poster">
+                <a href="{{ path('wild_programs') }}" class="btn btn-info mt-4">
+                    Retour à l'accueil
+                </a>
+        </div>
+    
+            <div class="col-6">
                 <h1 class="mt-0">{{ program.title|capitalize }}</h1>
                 <p>{{ program.summary }}</p>
-                <p><strong>Catégorie</strong>
-                    <span class="badge badge-secondary" style="background: {{ program.category.color }}">
+                    <span class="c-badge" style="background: {{ program.category.color }}">
                         {{ program.category.name }}</span>
-                </p>
-
-                <div class="row">
+                
+                <div class="row mt-4">
                     <div class="col-6">
-                        <strong>Saisons :</strong>
+                        <h4>{{ seasons | length }} Saisons </h4>
                         {% if seasons is empty %}
                             <h3>Pas de saisons disponibles</h3>
                         {% endif %}
@@ -30,7 +33,7 @@
                         {% endfor %}
                     </div>
                     <div class="col-6">
-                        <strong>Acteurs :</strong>
+                        <h4>Acteurs</h4>
                         {% for actor in program.actors %}
                             <div>
                                 <a href="{{ path('wild_show_actor', { 'slug': actor.slug }) }}">{{ actor.name }}
@@ -41,10 +44,6 @@
                         {% endfor %}
                     </div>
                 </div>
-
-                <a href="{{ path('wild_programs') }}" class="btn btn-info">
-                    Retour à l'accueil
-                </a>
             </div>
     </div>
 {% endblock %}
