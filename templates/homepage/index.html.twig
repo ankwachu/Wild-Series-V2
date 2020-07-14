@@ -12,7 +12,7 @@
         {% for program in programs %}
             <div class="col-md-4 mb-2">
                 <div class="card mx-auto" style="width: 21rem;">
-                    <img src="{{ program.poster }}" class="card-img" alt="...">
+                    <img src="{{ program.poster }}" class="card-img img-fluid" alt="...">
                         <div class="card-body">
                             <h4 class="card-title">{{ program.title }}</h4>
                             <span class="c-badge" style="background: {{ program.category.color }}">
@@ -43,10 +43,8 @@
             {% endfor %}
         </div>
 
-        {# {% if is_granted('ROLE_ADMIN') %}
-            <div>
-                <a href="{{ path('category') }}">Créer une catégorie</a>
-            </div>
-            {% endif %} #}
+        {% if is_granted('ROLE_ADMIN') %}
+            
+            {% endif %}
         {# {{ dump(episodes) }} #}
     {% endblock %}

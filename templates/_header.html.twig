@@ -17,7 +17,7 @@
                 <li class="nav-item {% if 'program' in app.request.attributes.get('_route') %}active{% endif %}">
                     <a class="nav-link" href="{{ path('wild_programs') }}">Séries</a>
                 </li>
-                <li class="nav-item {% if 'category' in app.request.attributes.get('_route') %}active{% endif %}">
+                <li class="nav-item {% if 'category_list' in app.request.attributes.get('_route') %}active{% endif %}">
                     <a class="nav-link" href="{{ path('category_list') }}">Catégories</a>
                 </li>
                 <li class="nav-item {% if 'calendar' in app.request.attributes.get('_route') %}active{% endif %}">
@@ -36,6 +36,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% if 'actor_index' in app.request.attributes.get('_route') %}active{% endif %}" href="{{ path('actor_index') }}">Actor CRUD</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if 'app_category' in app.request.attributes.get('_route') %}active{% endif %}" href="{{ path('app_category') }}">Créer une catégorie</a>
                 </li>
                 {% endif %}
                 

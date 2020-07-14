@@ -1,6 +1,6 @@
-@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap";
 
-@import "partials/_vars.scss";
+@import "partials/_vars";
 @import "partials/_card";
 @import "partials/_jumbotron";
 @import "partials/_form";
@@ -57,6 +57,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   font-weight: 700;
   line-height: 1;
   border-radius: .25rem; 
+  //background-color: ;
 }
 
 .agenda {

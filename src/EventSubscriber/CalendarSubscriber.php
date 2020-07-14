@@ -91,7 +91,7 @@ class CalendarSubscriber implements EventSubscriberInterface
             $episodeEvent = new Event(
                 $episode->getTitle(),
                 $episode->getBeginAt(),
-                $episode->getEndAt() // If the end date is null or not defined, a all day event is created.
+                $episode->getEndAt() // If the end date is null or not defined, a all day event is created.  
             );
             /*
              * Add custom options to events
