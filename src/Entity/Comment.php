@@ -40,9 +40,9 @@ class Comment
     private $episode;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
-    private $date;
+    private $publishedAt;
 
     public function getId(): ?int
     {
@@ -97,14 +97,14 @@ class Comment
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getPublishedAt(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->publishedAt;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setPublishedAt(\DateTimeInterface $publishedAt): self
     {
-        $this->date = $date;
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }

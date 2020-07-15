@@ -150,7 +150,7 @@ class WildController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $comment->setAuthor($this->getUser());
             $comment->setEpisode($episode);
-            $comment->setDate(new \DateTime());
+            $comment->setPublishedAt(new \DateTime());
             $entityManager->persist($comment);
             $entityManager->flush();
             return $this->redirectToRoute('wild_episode', ['slug' => $episode->getSlug()] );
