@@ -29,9 +29,35 @@
                     {{ episode.number }}
                     :
                     {{ episode.title|capitalize }}</h3>
-                <p>{{ episode.beginAt|format_datetime('full', 'short', locale='fr')|format_datetime('full', 'short', locale='fr') | capitalize }}</p>
+                <p>{{ episode.beginAt|format_datetime('full', 'short', locale='fr') | capitalize }}</p>
                 <p>{{ episode.synopsis }}</p>
 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {% if app.user %}
+                    <h2>Laissez un commentaire</h2>
+                    {{ include ('comment/_form.html.twig') }}
+                
+                    <h2 class="mt-5">Commentaires</h2>
+                    
+                    {% for comment in comments %}
+                        <div class="card" style="width: 28rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Commentaire de
+                                    {{ comment.author.email }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">publié le
+                                    {{ comment.date ? comment.date|date('d/m/Y') : '' }}</h6>
+                                <p class="card-text">{{ comment.comment }}</p>
+                                <a href="#" class="card-link">note :
+                                    {{ comment.rate }}/5</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                    <a href="{{ path('app_login') }}">Pour écrire un commentaire, connectez-vous</a>
+                {% endif %}
             </div>
         </div>
     {% endblock %}
