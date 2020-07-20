@@ -46,9 +46,15 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Program::class)
+     */
+    private $watchlists;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->watchlists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,5 +176,45 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Program[]
+     */
+    public function getWatchlists(): Collection
+    {
+        return $this->watchlists;
+    }
+
+    public function addWatchlist(Program $watchlist): self
+    {
+        if (!$this->watchlists->contains($watchlist)) {
+            $this->watchlists[] = $watchlist;
+        }
+
+        return $this;
+    }
+
+    public function removeWatchlist(Program $watchlist): self
+    {
+        if ($this->watchlists->contains($watchlist)) {
+            $this->watchlists->removeElement($watchlist);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Program $program
+     * @return bool
+     */
+    public function isInWatchlist( Program $program): bool
+    {
+        if($this->watchlists->contains($program)) {
+            $watchlist = true;
+        } else {
+            $watchlist = false;
+        }
+        return $watchlist;
     }
 }

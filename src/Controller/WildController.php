@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Actor;
 use App\Entity\User;
+use App\Entity\Actor;
 use App\Entity\Season;
 use App\Entity\Comment;
 use App\Entity\Episode;
@@ -11,6 +11,7 @@ use App\Entity\Program;
 use App\Form\CommentType;
 use App\Form\ProgramSearchType;
 use App\Repository\ProgramRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -185,5 +186,25 @@ class WildController extends AbstractController
     public function calendar(): Response
     {
         return $this->render('wild/calendar.html.twig');
+    }
+
+    /**
+     * @Route("/{id}/watchlist", name="program_watchlist", methods={"GET","POST"})
+     */
+    public function addToWatchlist(Request $request, Program $program, EntityManagerInterface
+$manager): Response
+    {
+        if ($this->getUser()->getWatchlists()->contains($program)) {
+            $this->getUser()->removeWatchlist($program)   ;
+        }
+        else {
+            $this->getUser()->addWatchlist($program);
+        }
+
+        $manager->flush();
+        // return $this->json([
+        //     'isInWatchlist' => $this->getUser()->isInWatchlist($program)
+        // ]);
+        return $this->redirectToRoute('wild_programs');
     }
 }
