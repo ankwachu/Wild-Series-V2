@@ -210,9 +210,9 @@ class User implements UserInterface
      */
     public function isInWatchlist( Program $program): bool
     {
-        if($this->watchlists->contains($program)) {
+        if ($this->watchlists->contains($program)) {
             $watchlist = true;
-        } else {
+        }else{
             $watchlist = false;
         }
         return $watchlist;

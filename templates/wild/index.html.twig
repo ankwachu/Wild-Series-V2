@@ -40,9 +40,13 @@
                         </small>
                     </h2>
                     {% if app.user %}
-                        <a id="watchlist" href="{{ path('wild_program_watchlist', {'id': program.id}) }}">
-                            <i class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart watchlist"></i>
-                        </a>  
+                        {# <a id="watchlist" href="{{ path('wild_program_watchlist', {'id': program.id}) }}">
+                            <i class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart watchlist" href="{{ path('wild_program_watchlist', {'id': program.id}) }}"></i>
+                        </a>  #}
+                        <i id="watchlist-{{ program.id }}"
+                       class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart watchlist"
+                       style="color: red" data-href="{{ path('wild_program_watchlist', {'id': program.id}) }}">
+                    </i>
                     {% endif %}
                 </div>
             {% else %}

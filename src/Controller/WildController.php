@@ -190,6 +190,10 @@ class WildController extends AbstractController
 
     /**
      * @Route("/{id}/watchlist", name="program_watchlist", methods={"GET","POST"})
+     * @param Request $request
+     * @param Program $program
+     * @param EntityManagerInterface $manager
+     * @return Response
      */
     public function addToWatchlist(Request $request, Program $program, EntityManagerInterface
 $manager): Response

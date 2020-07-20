@@ -25,5 +25,3 @@ require('bootstrap');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
-
-import "@fortawesome/fontawesome-free/js/all";
