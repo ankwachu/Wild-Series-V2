@@ -2,18 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Actor;
 use App\Entity\Season;
+use App\Entity\Comment;
 use App\Entity\Episode;
 use App\Entity\Program;
+use App\Form\CommentType;
 use App\Form\ProgramSearchType;
 use App\Repository\ProgramRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/wild", name="wild_")
@@ -123,7 +127,7 @@ class WildController extends AbstractController
      * @Route("/episode/{slug}", defaults={"slug" = null},
      *     name="episode")
      */
-    public function showEpisode(?string $slug): Response
+    public function showEpisode(?string $slug, Request $request): Response
     {
         $episode = $this->getDoctrine()
         ->getRepository(Episode::class)
@@ -137,11 +141,28 @@ class WildController extends AbstractController
 
         $season = $episode->getSeasons();
         $program = $season->getProgram();
+        $comments = $episode->getComments();
+
+        $comment = new Comment;
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $comment->setAuthor($this->getUser());
+            $comment->setEpisode($episode);
+            $comment->setPublishedAt(new \DateTime());
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            return $this->redirectToRoute('wild_episode', ['slug' => $episode->getSlug()] );
+        }
 
         return $this->render('wild/episode.html.twig', [
             'episode' => $episode,
             'season'   => $season,
             'program'  => $program,
+            'comments' => $comments,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -165,5 +186,29 @@ class WildController extends AbstractController
     public function calendar(): Response
     {
         return $this->render('wild/calendar.html.twig');
+    }
+
+    /**
+     * @Route("/{id}/watchlist", name="program_watchlist", methods={"GET","POST"})
+     * @param Request $request
+     * @param Program $program
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    public function addToWatchlist(Request $request, Program $program, EntityManagerInterface
+$manager): Response
+    {
+        if ($this->getUser()->getWatchlists()->contains($program)) {
+            $this->getUser()->removeWatchlist($program)   ;
+        }
+        else {
+            $this->getUser()->addWatchlist($program);
+        }
+
+        $manager->flush();
+        // return $this->json([
+        //     'isInWatchlist' => $this->getUser()->isInWatchlist($program)
+        // ]);
+        return $this->redirectToRoute('wild_programs');
     }
 }

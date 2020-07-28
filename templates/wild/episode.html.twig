@@ -29,9 +29,68 @@
                     {{ episode.number }}
                     :
                     {{ episode.title|capitalize }}</h3>
-                <p>{{ episode.beginAt|format_datetime('full', 'short', locale='fr')|format_datetime('full', 'short', locale='fr') | capitalize }}</p>
+                <p>{{ episode.beginAt|format_datetime('full', 'short', locale='fr') | capitalize }}</p>
                 <p>{{ episode.synopsis }}</p>
 
             </div>
         </div>
-    {% endblock %}
+        {# <div class="row">
+            <div class="col-6">
+                {% if app.user %}
+                    <h2 class="mt-5">Commentaires</h2>
+                    {% for comment in comments %}
+                        <div class="card" style="width: 28rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Commentaire de
+                                    {{ comment.author.email }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">publié
+                                    {{ comment.publishedAt ? comment.publishedAt|ago : 'unpublished' }}</h6>
+                                <p class="card-text">{{ comment.comment }}</p>
+                                <a href="#" class="card-link">note :
+                                    {{ comment.rate }}/5</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="jumbotron">
+                        <h2>Laissez un commentaire</h2>
+                        {{ include ('comment/_form.html.twig') }}
+                    </div>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Pour écrire un commentaire, connectez-vous</a>
+                {% endif %}
+            </div>
+        </div> #}
+
+        <div class="row mx-5">
+            <div class="col-6 d-flex flex-column">
+     <h3 class="">Commentaires<i class="far fa-comments mr-2 float-right"></i></h3>
+                    {% for comment in comments %}
+                {# <div class=""> #}
+                    {# <img class="c-logs__avatar" src="" alt=""> #}
+                        <div class="c-logs__body my-3">
+                            <div class="c-logs__header">
+                                <h3 class="c-logs__title">{{ comment.author.email }}</h3>
+                                <span class="small">{{ comment.publishedAt ? comment.publishedAt|ago : 'unpublished' }}</span>
+                                <p class="float-right">{{ comment.rate }}<i class="far fa-star ml-1"></i></p>
+                            </div>
+                            <div class="c-logs__content">
+                                <p>{{ comment.comment }}</p>
+                            </div>
+                        </div>
+                {# </div> #}
+                        {% endfor %}
+                        {% if app.user %}
+                        <div class="jumbotron">
+                        <h3>Laissez un commentaire</h3>
+                        {{ include ('comment/_form.html.twig') }}
+                    </div>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn btn-lg btn-outline-primary">Pour écrire un commentaire, connectez-vous</a>
+                
+            </div>
+        </div>
+        
+{% endif %}
+
+    </div>
+{% endblock %}
