@@ -26,7 +26,7 @@
         </div>
 
         <div class="row px-2 mt-3 agenda">
-            <div class="col-12 d-flex justify-content-between align-items-center px-4">
+            <div class="col-12 d-flex justify-content-between align-items-center px-3">
                 <h2>Ce soir à la télévision</h2>
                 <a href="{{ path('wild_calendar') }}">Voir l'agenda des séries ></a>
             </div>
@@ -37,6 +37,27 @@
                             <h4 class="card-title">{{ episode.seasons.program.title }}</h4>
                             <p>{{ episode.beginAt|format_datetime('full', 'short', locale='fr') | capitalize }}</p>
                             <a href="{{ path('wild_episode', { 'slug': episode.slug}) }}" class="card-link">Fiche de l'épisode ></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row px-2 mt-3 agenda">
+            <div class="col-12">
+                <h2>Les derniers commentaires</h2>
+            </div>
+            {% for comment in comments %}
+                <div class="col-md-3 mb-3">
+                    <div class="card mx-auto">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ comment.episode.seasons.program.title }}</h4>
+                            <span class="">"{{ comment.comment|u.truncate(140, '...',false)  }}"</span>
+                            <div class="author mb-2">
+                            <span>{{ comment.author.name }}</span>
+                            <span class="small">- {{ comment.publishedAt ? comment.publishedAt|ago : 'unpublished' }}</span>
+                            </div>
+                            <a href="{{ path('wild_episode', { 'slug': comment.episode.slug}) }}" class="card-link">Fiche de l'épisode ></a>
                         </div>
                     </div>
                 </div>

@@ -7,21 +7,27 @@
 {% block body %}
     <div class="row">
         <div class="col-6">
-                <img class="img-fluid" src="{{ program.poster }}" alt="{{ program.title }} poster">
+            <img class="img-fluid" src="{{ program.poster }}" alt="{{ program.title }} poster">
                 <a href="{{ path('wild_programs') }}" class="btn btn-info mt-4">
                     Retour à l'accueil
                 </a>
-        </div>
-    
+            </div>
+
             <div class="col-6">
-                <h1 class="mt-0">{{ program.title|capitalize }}</h1>
+                <h1 class="mt-0">{{ program.title|capitalize }}
+                    {% if app.user %}
+                        <i id="watchlist-{{ program.id }}" class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart watchlist" style="color: red" data-href="{{ path('wild_program_watchlist', {'id': program.id}) }}"></i>
+                    {% endif %}
+                </h1>
                 <p>{{ program.summary }}</p>
-                    <span class="c-badge" style="background: {{ program.category.color }}">
-                        {{ program.category.name }}</span>
-                
+                <span class="c-badge" style="background: {{ program.category.color }}">
+                    {{ program.category.name }}</span>
+
                 <div class="row mt-4">
                     <div class="col-6">
-                        <h4>{{ seasons | length }} Saisons </h4>
+                        <h4>{{ seasons | length }}
+                            Saisons
+                        </h4>
                         {% if seasons is empty %}
                             <h3>Pas de saisons disponibles</h3>
                         {% endif %}
@@ -45,5 +51,9 @@
                     </div>
                 </div>
             </div>
-    </div>
-{% endblock %}
+        </div>
+    {% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('watchlist') }}
+    {% endblock %}

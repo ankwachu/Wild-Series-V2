@@ -38,16 +38,14 @@
                             <span class="badge badge-secondary" style="background: {{ program.category.color }}">
                                 {{ program.category.name }}</span>
                         </small>
-                    </h2>
-                    {% if app.user %}
-                        {# <a id="watchlist" href="{{ path('wild_program_watchlist', {'id': program.id}) }}">
-                            <i class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart watchlist" href="{{ path('wild_program_watchlist', {'id': program.id}) }}"></i>
-                        </a>  #}
+                        {% if app.user %}
                         <i id="watchlist-{{ program.id }}"
                        class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart watchlist"
                        style="color: red" data-href="{{ path('wild_program_watchlist', {'id': program.id}) }}">
                     </i>
                     {% endif %}
+                    </h2>
+                    
                 </div>
             {% else %}
                 <div>

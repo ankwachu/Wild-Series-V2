@@ -1,0 +1,84 @@
+/* Vars
+========================================================================== */
+
+$avatar-border-color: #f7a616;
+$avatar-border-width: 4px;
+
+// default
+$color: #999;
+$bg: #f5f6fa;
+$title-color: #608ebf;
+
+// blue
+$blue-color: #fff;
+$blue-bg: #608ebf;
+$blue-title-color: rgba(#000, .5);
+
+
+/* Component
+========================================================================== */
+
+.c-logs {
+  position: relative;
+  margin: 50px;
+  color: $color;
+}
+
+.c-logs:before {
+  position: absolute;
+  left: ((72px / 2) + (4px / 2));
+  top: 10px;
+  bottom: 0;
+  content: "";
+  display: block;
+  width: 4px;
+  background-color: $avatar-border-color;
+}
+
+// .c-logs__item {
+//   position: relative;
+//   padding-left: 110px;
+// }
+
+// .c-logs__item:not(:first-child) {
+//   margin-top: 70px;
+// }
+
+.c-logs__avatar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: $avatar-border-width;
+  border-radius: 50%;
+  box-shadow: 0 0 0 $avatar-border-width $avatar-border-color;
+}
+
+.c-logs__body {
+  position: relative;
+  padding: 20px;
+  border-radius: 3px;
+  background-color: $bg;
+  box-shadow: 0 6px 15px rgba(#000, .4);
+}
+
+.c-logs__body:before {
+  position: absolute;
+  right: 100%;
+  top: 33px;
+  content: "";
+  display: block;
+  border: 10px solid transparent;
+  border-right-color: $bg;
+}
+
+.c-logs__title {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 120%;
+  font-weight: bold;
+  color: $title-color;
+}
