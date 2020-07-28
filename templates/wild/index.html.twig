@@ -39,13 +39,10 @@
                                 {{ program.category.name }}</span>
                         </small>
                         {% if app.user %}
-                        <i id="watchlist-{{ program.id }}"
-                       class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart watchlist"
-                       style="color: red" data-href="{{ path('wild_program_watchlist', {'id': program.id}) }}">
-                    </i>
-                    {% endif %}
+                            <i id="watchlist-{{ program.id }}" class="{{ app.user.isInWatchlist(program) ? 'fas' : 'far' }} fa-heart watchlist" style="color: red" data-href="{{ path('wild_program_watchlist', {'id': program.id}) }}"></i>
+                        {% endif %}
                     </h2>
-                    
+
                 </div>
             {% else %}
                 <div>
